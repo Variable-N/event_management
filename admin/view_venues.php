@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST['id'];
 
         // Delete the record from the database
-        $deleteQuery = "DELETE FROM venues WHERE id='$id'";
+        $deleteQuery = "DELETE FROM venues WHERE venue_id='$id'";
         $deleteResult = mysqli_query($connect, $deleteQuery);
 
         if ($deleteResult) {
