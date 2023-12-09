@@ -4,9 +4,9 @@ session_start();
 
 if (isset($_SESSION['user'])) {
 	unset($_SESSION['user']);
-	header("Location:get_started.html");
+	
 }
 
-
+header("Location:get_started.html");
 
  ?>

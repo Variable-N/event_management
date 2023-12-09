@@ -28,8 +28,10 @@ if (isset($_POST['login'])) {
             $_SESSION['user'] = $uname;
             $_SESSION['type'] = $type;
             header("Location: odashboard.php");
-        } else {
-            $output = "Admin will be avaiable soon";
+        } else if ($type == 'A'){
+            $_SESSION['user'] = $uname;
+            $_SESSION['type'] = $type;
+            header("Location: admin/adashboard.php");
         }
     }else{
         $output .= "Failed to login";

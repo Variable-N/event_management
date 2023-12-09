@@ -1,4 +1,5 @@
-
+<?php
+include("load_data.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -142,59 +143,41 @@
 </head>
 
 <body>
-    <div class="top-bar">
-    <div class ="eventm" align = 'left'> EventM </div>
-    <div class="user-info">
-            <span>Welcome</span>
-            <span>Username</span>
-            <a href = 'logout.php' class="logout-btn"> Logout </a>
-        
-    </div>
+<?php include("topbar.php");
+    ?>
     </div>
     <h2 align = center> <div class ="motto" > Choose Your Desired Decoration </div> </h2>
     <div class="dashboard">
         <div class="info-container">
-            <div class="info-panel">
-                <h1>Flowers</h1>
-                <h2>Size: 15000 square feet</h2>
-                <h2>Capacity: 500 </h2>
-                <h2>Dhaka, Bangladesh </h2>
-                Description: Onek bhalo. <br>
-                <br>
-                <br>
-                <a href="venuebook.php" class="btn btn-login button2"> Book Now</a>
-            </div>
+            <?php
+            // $venue_count = mysqli_fetch_assoc(mysqli_query($connect, "SELECT COUNT(venue_id) AS venue_count FROM venues;"))['venue_count'] ?? 0;
+            //for ($i = 1; $i <= $venue_count; $i++) {
+            //  echo '<div class="info-panel">';
 
-            <div class="info-panel">
-                <h1>Carpet</h1>
-                <h2>Size: 15000 square feet</h2>
-                <h2>Capacity: 500 </h2>
-                <h2>Dhaka, Bangladesh </h2>
-                Description: Onek bhalo. <br>
-                <br>
-                <br>
-                <a href="venuebook.php" class="btn btn-login button2"> Book Now</a>
-                
+            //}
+            $query = "SELECT * FROM `decorator`";
+            $result = mysqli_query($connect, $query);
 
-            </div>
-            <div class="info-panel">
-                <h2> Take a look to the world class services we provide...</h2>
-                <h2> Photography & Cinematography </h2>
-               
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="info-panel">';
+                    echo '<h1>' . $row['name'] . '</h1>';
+                    echo '<h2>Services: <font color = "black"> ' . $row['services'] . '</font></h2>';
+                    echo '<b>Team Details:</b> ' . $row['team_details'] . '<br>';
+                    echo '<h3>Location: ' . $row['location'] . '</h3>';
+                    echo '<h3>Coverage: ' . $row['coverage'] . '</h3>';
+                    echo '<h2>Price: ' . $row['price'] . ' BDT </h2>';
+                    echo '<h4>Contact No: ' . $row['contact'] . '<br>';
+                    echo '<br><br><br><a href="decorationBook.php" class="btn btn-login button2">Book Now</a>';
+                    echo '</div>';
+                }
 
-            </div>
-            <div class="info-panel">
-                <h2> Take a look to the world class services we provide...</h2>
-                <h2> Photography & Cinematography </h2>
-                
-
-            </div>
-
-            <div class="info-panel">
-                <h2> User Information </h2>
-                <h2> Name: Full Name </h2>
-                
-            </div>
+                mysqli_free_result($result); // Free the result set
+            } else {
+                echo "Error executing query: " . mysqli_error($connect);
+            }
+            ?>
+            
         </div>
     </div>
 </body>

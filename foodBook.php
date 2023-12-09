@@ -1,4 +1,5 @@
-
+<?php
+include("load_data.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,12 +26,15 @@
             justify-content: space-between;
             padding: 20px;
         }
+
         .info-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
             gap: 20px;
-            max-width: 1800px; /* Adjust the maximum width as needed */
-            margin: 0 auto; /* Center the container */
+            max-width: 1800px;
+            /* Adjust the maximum width as needed */
+            margin: 0 auto;
+            /* Center the container */
         }
 
         .info-panel {
@@ -63,6 +67,7 @@
         .logout-btn:hover {
             background-color: #d32f2f;
         }
+
         .btn {
             padding: 15px 30px;
             font-size: 20px;
@@ -107,26 +112,32 @@
             color: #fff;
             /* Text color on hover */
         }
+
         a {
             text-decoration: none;
         }
+
         .eventm {
             font-size: 40px;
             color: #ffffff;
             font-family: Brush Script MT;
         }
-        .motto{
+
+        .motto {
             font-size: 70px;
             color: #5b3a9a;
             font-family: Brush Script MT;
         }
+
         .top-bar {
-            background-color: rgba(215, 152, 163, 0.7); /* Light pinkish color with 0.7% transparency */
+            background-color: rgba(215, 152, 163, 0.7);
+            /* Light pinkish color with 0.7% transparency */
             padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .user-info {
             text-align: right;
         }
@@ -134,84 +145,52 @@
         .user-info span {
             margin-right: 10px;
         }
+
         h2 {
             font-family: 'Times New Roman';
-            color :#5b3a9a;
+            color: #5b3a9a;
         }
     </style>
 </head>
 
 <body>
-    <div class="top-bar">
-    <div class ="eventm" align = 'left'> EventM </div>
-    <div class="user-info">
-            <span>Welcome</span>
-            <span>Username</span>
-            <a href = 'logout.php' class="logout-btn"> Logout </a>
-        
+    <?php include("topbar.php");
+    ?>
     </div>
-    </div>
-    <h2 align = center> <div class ="motto" > Savoring Every Moment, Crafting Culinary Experiences. <br> Choose your desired food:</div> </h2>
+    <h2 align=center>
+        <div class="motto"> Savoring Every Moment, Crafting Culinary Experiences. <br> Choose your desired food from our
+            food vendors:</div>
+    </h2>
     <div class="dashboard">
         <div class="info-container">
-            <div class="info-panel">
-                <h1>Kacchi Biriyani Set</h1>
-                <h2>Size: 15000 square feet</h2>
-                <h2>Capacity: 500 </h2>
-                <h2>Dhaka, Bangladesh </h2>
-                Description: Onek bhalo. <br>
-                <br>
-                <br>
-                <a href="venuebook.php" class="btn btn-login button2"> Book Now</a>
-            </div>
+            <?php
+            // $venue_count = mysqli_fetch_assoc(mysqli_query($connect, "SELECT COUNT(venue_id) AS venue_count FROM venues;"))['venue_count'] ?? 0;
+            //for ($i = 1; $i <= $venue_count; $i++) {
+            //  echo '<div class="info-panel">';
+            
+            //}
+            $query = "SELECT * FROM `food_team`";
+            $result = mysqli_query($connect, $query);
 
-            <div class="info-panel">
-                <h1>Morog Polao Set</h1>
-                <h2>Size: 15000 square feet</h2>
-                <h2>Capacity: 500 </h2>
-                <h2>Dhaka, Bangladesh </h2>
-                Description: Onek bhalo. <br>
-                <br>
-                <br>
-                <a href="venuebook.php" class="btn btn-login button2"> Book Now</a>
-                
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="info-panel">';
+                    echo '<h1>' . $row['name'] . '</h1>';
+                    echo '<h2>Services: <font color="black">' . $row['services'] . '</font></h2>'; // Adjusted column name to 'services'
+                    echo '<b>Food Menu:</b> ' . $row['Food Menu'] . '<br>'; // Adjusted column name to 'Food Menu'
+                    echo '<h3>Location: ' . $row['location'] . '</h3>';
+                    echo '<h3>Coverage: ' . $row['coverage'] . '</h3>'; // Adjusted column name to 'coverage'
+                    echo '<h2>Price: ' . $row['price'] . ' BDT </h2>';
+                    echo '<h4>Contact No: ' . $row['contact'] . '</h4>';
+                    echo '<br><br><br><a href="foodBook.php" class="btn btn-login button2">Book Now</a>';
+                    echo '</div>';
+                }
 
-            </div>
-            <div class="info-panel">
-                <h1>Plain Polao Set</h1>
-                <h2>Size: 15000 square feet</h2>
-                <h2>Capacity: 500 </h2>
-                <h2>Dhaka, Bangladesh </h2>
-                Description: Onek bhalo. <br>
-                <br>
-                <br>
-                <a href="venuebook.php" class="btn btn-login button2"> Book Now</a>
-               
-
-            </div>
-            <div class="info-panel">
-                <h1>Bangaliana Voj Set</h1>
-                <h2>Size: 15000 square feet</h2>
-                <h2>Capacity: 500 </h2>
-                <h2>Dhaka, Bangladesh </h2>
-                Description: Onek bhalo. <br>
-                <br>
-                <br>
-                <a href="venuebook.php" class="btn btn-login button2"> Book Now</a>
-
-            </div>
-
-            <div class="info-panel">
-                <h1>Vegeterian Murkhoder Set</h1>
-                <h2>Size: 15000 square feet</h2>
-                <h2>Capacity: 500 </h2>
-                <h2>Dhaka, Bangladesh </h2>
-                Description: Onek bhalo. <br>
-                <br>
-                <br>
-                <a href="venuebook.php" class="btn btn-login button2"> Book Now</a>
-                
-            </div>
+                mysqli_free_result($result); // Free the result set
+            } else {
+                echo "Error executing query: " . mysqli_error($connect);
+            }
+            ?>
         </div>
     </div>
 </body>

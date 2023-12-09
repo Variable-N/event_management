@@ -1,12 +1,36 @@
 <?php
-include("load_data.php"); ?>
+include("load_data.php");
+$succ = False;
+$output = "";
+if (isset($_POST['register'])) {
+    $id = rand(111111111, 999999999);
+    $owner = $uname;
+    $model = $_POST['car_name'];
+    $year = $_POST['year'];
+    $driver_name = $_POST['driver_name'];
+    $contact = $_POST['contact'];
+    $Price = $_POST['Price'];
+    $sql = "INSERT INTO `car_rent` (`id`, `owner`, `model`, `year`, `contact`, `price`, `driver_name`) VALUES ('$id', '$owner', '$model', '$year', '$contact', '$Price', '$driver_name')";
+
+    if (mysqli_query($connect, $sql)) {
+        $succ = True;
+        $output = '<br><font color = "green"> Successfully Added <font>';
+    }
+    else{
+        $succ = False;
+        $output = mysqli_error($connect);
+    }
+    
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Your Venue</title>
+    <title>Add Your Car</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,6 +43,34 @@ include("load_data.php"); ?>
             color: #fff;
             padding: 15px;
             text-align: right;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        input[type="password"] {
+            width: 100%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: -10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            /* Transparent background */
+            color: #000;
         }
 
         .dashboard {
@@ -157,40 +209,54 @@ include("load_data.php"); ?>
     <?php include("topbar.php");
     ?>
     </div>
-    <h2 align=center>
-        <div class="motto"> Vurrummmm Vurrruuuuummmmm. Your car is here!</div>
-    </h2>
+    <h1 align=center>
+        <font style='color: #2200AA ; font-family: "Times New Roman"'> Add a new Car</font>
+        <font style='color: #FF0000 ; font-family: "Times New Roman"'> <?php echo $output; ?></font>
+    </h1>
+
     <div class="dashboard">
-        <div class="info-container">
-            <?php
-            // $venue_count = mysqli_fetch_assoc(mysqli_query($connect, "SELECT COUNT(venue_id) AS venue_count FROM venues;"))['venue_count'] ?? 0;
-            //for ($i = 1; $i <= $venue_count; $i++) {
-            //  echo '<div class="info-panel">';
-            
-            //}
-            $query = "SELECT * FROM `car_rent`";
-            $result = mysqli_query($connect, $query);
+        <div class="info-panel">
+            <form method="POST">
+                <div class="input-group">
+                    <label for="Team_name">
+                        <font color="#111166"><b>Car Model Name:</b></font>
+                    </label>
+                    <input type="text" id="Team_name" name="car_name" required>
+                </div>
+                <div class="input-group">
+                    <label for="services">
+                        <font color="#111166"><b>Year:</b></font>
+                    </label>
+                    <input type="text" id="services" name="year" required>
+                </div>
+                <div class="input-group">
+                    <label for="FoodMenu">
+                        <font color="#111166"><b>Driver Name:</b></font>
+                    </label>
+                    <input type="text" id="FoodMenu" name="driver_name" required>
+                </div>
 
-            if ($result) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div class="info-panel">';
-                    echo '<h1>' . $row['model'] . '</h1>'; // Adjusted column name to 'model'
-                    echo '<h2>Model Year: ' . $row['year'] . '</h2>'; // Adjusted column name to 'year'
-                    echo '<h4>Driver Name: ' . $row['driver_name'] . '</h4>'; // Adjusted column name to 'Driver Name'
-                    echo '<h3>Contact: ' . $row['contact'] . '</h3>';
-                    echo '<h2>Price: ' . $row['price'] . ' BDT (Per KM) </h2>';
-                    echo '<br><br><br><a href="carBooking.php" class="btn btn-login button2">Book Now</a>';
-                    echo '</div>';
-                }
-
-                mysqli_free_result($result); // Free the result set
-            } else {
-                echo "Error executing query: " . mysqli_error($connect);
-            }
-
-            ?>
         </div>
-    </div>
+
+        <div class="info-panel">
+            <div class="input-group">
+                <label for="phone">
+                    <font color="#111166"><b>Phone:</b></font>
+                </label>
+                <input type="number" id="phone" name="contact" required>
+            </div>
+            <div class="input-group">
+                <label for="Price">
+                    <font color="#111166"><b>Price per kilometer:</b></font>
+                </label>
+                <input type="text" id="Price" name="Price" required>
+            </div>
+
+            <button type="submit" name=register class="btn btn-login">Add </button>
+            <a href='odashboard.php' class="btn btn-login">Go Back</a>
+
+            </form>
+        </div>
 </body>
 
 </html>

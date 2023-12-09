@@ -12,6 +12,7 @@ $dob = $data[4];
 $email = $data[5];
 $phone = $data[7];
 $type = $data[8];
+
 date_default_timezone_set('Asia/Dhaka');
 
 $currentTime = date('H:i:s');
@@ -208,7 +209,7 @@ if ($currentTime >= '06:00:00' && $currentTime < '12:00:00') {
             <h2> Name: <?php echo $name ?> </h2>
             <h2> Email: <?php echo $email ?> </h2>
             <h2> Phone: <?php echo $phone ?></h2>
-            
+            <h2> Date of Birth: <?php echo $dob ?></h2>
             <br>
             <br>
             <h2>Want to change your information? Update here...</h2>

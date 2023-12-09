@@ -146,14 +146,14 @@ include("load_data.php");
         
     </div>
     </div>
-    <h2 align = center> <div class ="motto" > Good Morning! How can we help you today? </div> </h2>
+    <h2 align = center> <div class ="motto" > <?php echo $welcome ?>!! How can we help you today? </div> </h2>
     <div class="dashboard">
         <div class="info-panel">
             <h2>Your currently active venues:</h2>
             <h2>Your Income: </h2>
             <h2>Add a new venue</h2>
             <br>
-            <a href="venuebook.php" class="btn btn-login button2"> Add Venue</a>
+            <a href="venuecreate.php" class="btn btn-login button2"> Add Venue</a>
             <br>
             <br>
             <h2> View & Approve Orders </h2>
@@ -166,31 +166,31 @@ include("load_data.php");
             <h2> Add services you provides</h2>
             <h2> Photography & Cinematography </h2>
             <br>
-            <a href="photographyBook.php" class="btn btn-login button2">Add a Team</a>
+            <a href="photography_create.php" class="btn btn-login button2">Add a Team</a>
             <br>
             <br>
             <h2> Decorators </h2>
             <br>
-            <a href="decorationBook.php" class="btn btn-login button2">Add Decorations</a>
+            <a href="decorator_create.php" class="btn btn-login button2">Add Decorations</a>
             <br>
             <br>
             <h2> Food Items </h2>
             <br>
-            <a href="foodBook.php" class="btn btn-login button2">Add a new food item</a>
+            <a href="food_create.php" class="btn btn-login button2">Add a new food item</a>
             <br>
             <br>
             <h2> Your Vehicles </h2>
             <br>
-            <a href="carBook.php" class="btn btn-login button2"> Add New Vehicles</a>
+            <a href="car_add.php" class="btn btn-login button2"> Add New Vehicles</a>
 
 
         </div>
 
         <div class="info-panel">
             <h2> User Information </h2>
-            <h2> Name: Full Name </h2>
-            <h2> Email:Email </h2>
-            <h2> Phone: 0123456789 </h2>
+            <h2> Name: <?php echo $name ?> </h2>
+            <h2> Email: <?php echo $email ?> </h2>
+            <h2> Phone: <?php echo $phone ?></h2>
             
             <br>
             <br>
